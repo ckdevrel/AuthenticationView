@@ -1,4 +1,4 @@
-name: login_signup_view
+name: authentication_view
 description: A new Flutter package project for login and signups.
 version: 0.0.1
 author: TakeoffAndroid<takeoffandroid@gmail.com>
