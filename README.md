@@ -1,4 +1,4 @@
-# login_signup_view
+# Authentication View
 
 A new Flutter package project.
 

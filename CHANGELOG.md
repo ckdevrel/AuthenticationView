@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 30/07/2019 10:51 PM.
 
-* TODO: Describe initial release.
+* Added empty authentication view.
