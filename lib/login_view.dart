@@ -21,8 +21,10 @@ class LoginView extends StatefulWidget {
   List<FieldType> fieldTypes;
   ValidationCallback onValidation;
   List<TextEditingController> textEditingControllers = [TextEditingController(), TextEditingController()];
+  String buttonText;
+  Widget headerLayout;
 
-  LoginView({this.fieldTypes, @required this.onValidation});
+  LoginView({this.fieldTypes, @required this.onValidation, this.buttonText, this.headerLayout});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -43,15 +45,7 @@ class _LoginViewState extends State<LoginView> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('Login', style: TextStyle(fontWeight: FontWeight.w700, color: AuthColors.text_black), textScaleFactor: 2.5),
-                Icon(Icons.verified_user, color: AuthColors.green)
-              ],
-            ),
+            widget.headerLayout,
             SizedBox(height: 24),
             TextFormField(
               controller: widget.textEditingControllers[0],
@@ -105,7 +99,7 @@ class _LoginViewState extends State<LoginView> {
                 onPressed: () {
                   widget.onValidation(_formKey.currentState.validate(), [widget.textEditingControllers[0].text, widget.textEditingControllers[1].text]);
                 },
-                child: Text('CONTINUE'),
+                child: Text(widget.buttonText),
               ),
             ),
           ],
