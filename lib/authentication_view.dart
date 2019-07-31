@@ -29,4 +29,4 @@ class AuthenticationView extends StatelessWidget{
   }
 }
 
-typedef ValidationCallback = void Function(bool isValidationSuccess);
+typedef ValidationCallback = void Function(bool isValidationSuccess, List<String> fieldValues);

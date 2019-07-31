@@ -1,3 +1,3 @@
-## [0.0.8] - 31/07/2019 08:11 AM.
+## [0.0.9] - 31/07/2019 09:38 PM.
 
-* Fixes validation callback.
+* Provides text field values as callbacks.

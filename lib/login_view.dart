@@ -20,6 +20,8 @@ class LoginView extends StatefulWidget {
 
   List<FieldType> fieldTypes;
   ValidationCallback onValidation;
+  List<TextEditingController> textEditingControllers = [TextEditingController(), TextEditingController()];
+
   LoginView({this.fieldTypes, @required this.onValidation});
 
   @override
@@ -52,6 +54,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             SizedBox(height: 24),
             TextFormField(
+              controller: widget.textEditingControllers[0],
               autofocus: true,
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
@@ -72,6 +75,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             SizedBox(height: 16),
             TextFormField(
+              controller: widget.textEditingControllers[1],
               decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: AuthColors.underline)),
@@ -99,13 +103,9 @@ class _LoginViewState extends State<LoginView> {
                 color: AuthColors.green,
                 textColor: Colors.white,
                 onPressed: () {
-                  if(_formKey.currentState.validate()) {
-                    widget.onValidation(true);
-                  } else {
-                    widget.onValidation(false);
-                  }
+                  widget.onValidation(_formKey.currentState.validate(), [widget.textEditingControllers[0].text, widget.textEditingControllers[1].text]);
                 },
-                child: Text('COUNTINUE'),
+                child: Text('CONTINUE'),
               ),
             ),
           ],
