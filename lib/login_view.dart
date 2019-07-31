@@ -20,7 +20,7 @@ class LoginView extends StatefulWidget {
 
   List<FieldType> fieldTypes;
   ValidationCallback onValidation;
-  LoginView({this.fieldTypes, @required onValidation});
+  LoginView({this.fieldTypes, @required this.onValidation});
 
   @override
   _LoginViewState createState() => _LoginViewState();
