@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 
 import 'login_view.dart';
 
-enum Flow {
+enum ScreenType {
   LOGIN,
   SIGNUP
 }
 
 class AuthenticationView extends StatelessWidget{
-  Flow flow = Flow.LOGIN;
+  ScreenType screenType = ScreenType.LOGIN;
   List<FieldType> fieldTypes = [FieldType.MOBILE, FieldType.PASSWORD];
   Function(bool isValidationSuccess) onPressed;
 
-  AuthenticationView({this.flow, this.fieldTypes, @required this.onPressed});
+  AuthenticationView({this.screenType, this.fieldTypes, @required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-   switch(flow) {
-      case Flow.LOGIN:
+   switch(screenType) {
+      case ScreenType.LOGIN:
         return LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
 
-      case Flow.SIGNUP:
+      case ScreenType.SIGNUP:
         return LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
     }
    return null;
