@@ -1,3 +1,3 @@
-## [0.0.1] - 30/07/2019 10:51 PM.
+## [0.0.2] - 31/07/2019 07:51 AM.
 
-* Added empty authentication view.
+* Adds login view support with customizable field types.
