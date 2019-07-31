@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'auth_colors.dart';
+import 'authentication_view.dart';
 
 class FieldType {
   static const EMAIL  = const FieldType.value('Email address', 25, TextInputType.emailAddress, "Enter valid email address");
@@ -18,8 +19,8 @@ class FieldType {
 class LoginView extends StatefulWidget {
 
   List<FieldType> fieldTypes;
-  Function(bool isValidationSuccess) onPressed;
-  LoginView({this.fieldTypes, @required onPressed});
+  ValidationCallback onValidation;
+  LoginView({this.fieldTypes, @required onValidation});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -63,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
               keyboardType: fieldType1.keyboardType,
               maxLength: fieldType1.maxLength,
               validator: (value) {
-                if (value.isEmpty || value.length != fieldType1.maxLength) {
+                if (value.isEmpty) {
                   return fieldType1.errorText;
                 }
                 return null;
@@ -79,8 +80,9 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   hintStyle: TextStyle(color: AuthColors.text_grey),
                   hintText: fieldType2.hint),
+                  maxLength: fieldType2.maxLength,
               validator: (value) {
-                if (!RegExp(r"^(?=.*\d).{4,8}$").hasMatch(value)) {
+                if (value.isEmpty) {
                   return fieldType2.errorText;
                 }
                 return null;
@@ -96,7 +98,13 @@ class _LoginViewState extends State<LoginView> {
                     borderRadius: BorderRadius.all(Radius.circular(55))),
                 color: AuthColors.green,
                 textColor: Colors.white,
-                onPressed: widget?.onPressed(_formKey.currentState.validate()),
+                onPressed: () {
+                  if(_formKey.currentState.validate()) {
+                    widget.onValidation(true);
+                  } else {
+                    widget.onValidation(false);
+                  }
+                },
                 child: Text('COUNTINUE'),
               ),
             ),

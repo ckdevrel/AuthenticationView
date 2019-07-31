@@ -12,19 +12,21 @@ enum ScreenType {
 class AuthenticationView extends StatelessWidget{
   ScreenType screenType = ScreenType.LOGIN;
   List<FieldType> fieldTypes = [FieldType.MOBILE, FieldType.PASSWORD];
-  Function(bool isValidationSuccess) onPressed;
+  ValidationCallback onValidation;
 
-  AuthenticationView({this.screenType, this.fieldTypes, @required this.onPressed});
+  AuthenticationView({this.screenType, this.fieldTypes, @required this.onValidation});
 
   @override
   Widget build(BuildContext context) {
    switch(screenType) {
       case ScreenType.LOGIN:
-        return LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
+        return LoginView(fieldTypes: fieldTypes, onValidation: onValidation);
 
       case ScreenType.SIGNUP:
-        return LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
+        return LoginView(fieldTypes: fieldTypes, onValidation: onValidation);
     }
    return null;
   }
 }
+
+typedef ValidationCallback = void Function(bool isValidationSuccess);
