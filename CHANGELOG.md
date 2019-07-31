@@ -1,3 +1,3 @@
-## [0.0.2] - 31/07/2019 07:51 AM.
+## [0.0.3] - 31/07/2019 08:11 AM.
 
-* Adds login view support with customizable field types.
+* Makes authentication view as stateless widget.

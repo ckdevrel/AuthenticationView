@@ -9,20 +9,22 @@ enum Flow {
   SIGNUP
 }
 
-class AuthenticationView {
+class AuthenticationView extends StatelessWidget{
   Flow flow = Flow.LOGIN;
   List<FieldType> fieldTypes = [FieldType.MOBILE, FieldType.PASSWORD];
   Function(bool isValidationSuccess) onPressed;
 
-  AuthenticationView({this.flow, this.fieldTypes, @required this.onPressed}) {
-    switch(flow) {
+  AuthenticationView({this.flow, this.fieldTypes, @required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+   switch(flow) {
       case Flow.LOGIN:
-        LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
-        break;
+        return LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
 
       case Flow.SIGNUP:
-        LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
-        break;
+        return LoginView(fieldTypes: fieldTypes, onPressed: onPressed);
     }
+   return null;
   }
 }
