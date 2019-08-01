@@ -10,11 +10,11 @@ enum ScreenType {
 }
 
 class AuthenticationView extends StatelessWidget{
-  ScreenType screenType = ScreenType.LOGIN;
-  List<FieldType> fieldTypes = [FieldType.MOBILE, FieldType.PASSWORD];
+  ScreenType screenType;
+  List<FieldType> fieldTypes;
   ValidationCallback onValidation;
-  String buttonText = "CONTINUE";
-  Widget headerLayout = Container();
+  String buttonText;
+  Widget headerLayout;
 
   AuthenticationView({this.screenType, this.fieldTypes, @required this.onValidation, this.buttonText, this.headerLayout});
 

@@ -1,4 +1,3 @@
-## [0.1.0] - 31/07/2019 11:10 PM.
+## [0.1.3] - 01/08/2019 07:52 AM.
 
-* Provides header layout option.
-* Makes button text as dynamic.
+* Fixes cross axis and main axis alignment of column.

@@ -20,7 +20,6 @@ class LoginView extends StatefulWidget {
 
   List<FieldType> fieldTypes;
   ValidationCallback onValidation;
-  List<TextEditingController> textEditingControllers = [TextEditingController(), TextEditingController()];
   String buttonText;
   Widget headerLayout;
 
@@ -33,78 +32,99 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
 
+  List<FieldType> fieldTypes;
+  ValidationCallback onValidation;
+  String buttonText = "CONTINUE";
+  Widget headerLayout = Container(height: 0, width: 0);
+  List<TextEditingController> textEditingControllers = [TextEditingController(), TextEditingController()];
+
+  @override
+  void initState() {
+    super.initState();
+    fieldTypes = widget.fieldTypes ?? [FieldType.MOBILE, FieldType.PASSWORD];
+    onValidation = widget.onValidation ?? null;
+    buttonText = widget.buttonText ?? "CONTINUE";
+    headerLayout = widget.headerLayout ?? Container();
+  }
+
   @override
   Widget build(BuildContext context) {
-    FieldType fieldType1 = widget.fieldTypes[0];
-    FieldType fieldType2 = widget.fieldTypes[1];
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(36),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            widget.headerLayout,
-            SizedBox(height: 24),
-            TextFormField(
-              controller: widget.textEditingControllers[0],
-              autofocus: true,
-              decoration: InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AuthColors.underline)),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: AuthColors.green),
+    FieldType fieldType1 = fieldTypes[0];
+    FieldType fieldType2 = fieldTypes[1];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        headerLayout,
+        SingleChildScrollView(
+          padding: EdgeInsets.all(36),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 24),
+                TextFormField(
+                  controller: textEditingControllers[0],
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AuthColors.underline)),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AuthColors.green),
+                    ),
+                    hintStyle: TextStyle(color: AuthColors.text_grey),
+                    hintText: fieldType1.hint),
+                  keyboardType: fieldType1.keyboardType,
+                  maxLength: fieldType1.maxLength,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return fieldType1.errorText;
+                    }
+                    return null;
+                  },
                 ),
-                hintStyle: TextStyle(color: AuthColors.text_grey),
-                hintText: fieldType1.hint),
-              keyboardType: fieldType1.keyboardType,
-              maxLength: fieldType1.maxLength,
-              validator: (value) {
-                if (value.isEmpty) {
-                  return fieldType1.errorText;
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: widget.textEditingControllers[1],
-              decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AuthColors.underline)),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AuthColors.green),
+                SizedBox(height: 16),
+                TextFormField(
+                  controller: textEditingControllers[1],
+                  decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: AuthColors.underline)),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AuthColors.green),
+                      ),
+                      hintStyle: TextStyle(color: AuthColors.text_grey),
+                      hintText: fieldType2.hint),
+                      maxLength: fieldType2.maxLength,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return fieldType2.errorText;
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                ),
+                SizedBox(height: 48),
+                SizedBox(
+                  width: 240,
+                  height: 55,
+                  child: FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(55))),
+                    color: AuthColors.green,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      onValidation(_formKey.currentState.validate(), [textEditingControllers[0].text, textEditingControllers[1].text]);
+                    },
+                    child: Text(widget.buttonText),
                   ),
-                  hintStyle: TextStyle(color: AuthColors.text_grey),
-                  hintText: fieldType2.hint),
-                  maxLength: fieldType2.maxLength,
-              validator: (value) {
-                if (value.isEmpty) {
-                  return fieldType2.errorText;
-                }
-                return null;
-              },
-              obscureText: true,
+                ),
+              ],
             ),
-            SizedBox(height: 48),
-            SizedBox(
-              width: 240,
-              height: 55,
-              child: FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(55))),
-                color: AuthColors.green,
-                textColor: Colors.white,
-                onPressed: () {
-                  widget.onValidation(_formKey.currentState.validate(), [widget.textEditingControllers[0].text, widget.textEditingControllers[1].text]);
-                },
-                child: Text(widget.buttonText),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
