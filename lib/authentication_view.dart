@@ -15,17 +15,19 @@ class AuthenticationView extends StatelessWidget{
   ValidationCallback onValidation;
   String buttonText;
   Widget headerLayout;
+  FormFieldValidator field1Validator;
+  FormFieldValidator field2Validator;
 
-  AuthenticationView({this.screenType, this.fieldTypes, @required this.onValidation, this.buttonText, this.headerLayout});
+  AuthenticationView({this.screenType, this.fieldTypes, @required this.onValidation, this.buttonText, this.headerLayout, this.field1Validator, this.field2Validator});
 
   @override
   Widget build(BuildContext context) {
    switch(screenType) {
       case ScreenType.LOGIN:
-        return LoginView(fieldTypes: fieldTypes, onValidation: onValidation, buttonText: buttonText, headerLayout: headerLayout);
+        return LoginView(fieldTypes: fieldTypes, onValidation: onValidation, buttonText: buttonText, headerLayout: headerLayout, field1Validator: field1Validator, field2Validator: field2Validator,);
 
       case ScreenType.SIGNUP:
-        return LoginView(fieldTypes: fieldTypes, onValidation: onValidation, buttonText: buttonText, headerLayout: headerLayout);
+        return LoginView(fieldTypes: fieldTypes, onValidation: onValidation, buttonText: buttonText, headerLayout: headerLayout, field1Validator: field1Validator, field2Validator: field2Validator,);
     }
    return null;
   }

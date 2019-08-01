@@ -1,3 +1,3 @@
-## [0.1.3] - 01/08/2019 07:52 AM.
+## [0.1.4] - 01/08/2019 08:25 AM.
 
-* Fixes cross axis and main axis alignment of column.
+* Adds field 1 and field 2 validator.

@@ -22,8 +22,10 @@ class LoginView extends StatefulWidget {
   ValidationCallback onValidation;
   String buttonText;
   Widget headerLayout;
+  FormFieldValidator field1Validator;
+  FormFieldValidator field2Validator;
 
-  LoginView({this.fieldTypes, @required this.onValidation, this.buttonText, this.headerLayout});
+  LoginView({this.fieldTypes, @required this.onValidation, this.buttonText, this.headerLayout, this.field1Validator, this.field2Validator});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -34,9 +36,11 @@ class _LoginViewState extends State<LoginView> {
 
   List<FieldType> fieldTypes;
   ValidationCallback onValidation;
-  String buttonText = "CONTINUE";
-  Widget headerLayout = Container(height: 0, width: 0);
+  String buttonText;
+  Widget headerLayout;
   List<TextEditingController> textEditingControllers = [TextEditingController(), TextEditingController()];
+  FormFieldValidator field1Validator;
+  FormFieldValidator field2Validator;
 
   @override
   void initState() {
@@ -44,7 +48,9 @@ class _LoginViewState extends State<LoginView> {
     fieldTypes = widget.fieldTypes ?? [FieldType.MOBILE, FieldType.PASSWORD];
     onValidation = widget.onValidation ?? null;
     buttonText = widget.buttonText ?? "CONTINUE";
-    headerLayout = widget.headerLayout ?? Container();
+    headerLayout = widget.headerLayout ?? Container(height: 0, width: 0);
+    field1Validator = widget.field1Validator ?? null;
+    field2Validator = widget.field2Validator ?? null;
   }
 
   @override
@@ -78,12 +84,7 @@ class _LoginViewState extends State<LoginView> {
                     hintText: fieldType1.hint),
                   keyboardType: fieldType1.keyboardType,
                   maxLength: fieldType1.maxLength,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return fieldType1.errorText;
-                    }
-                    return null;
-                  },
+                  validator: field1Validator
                 ),
                 SizedBox(height: 16),
                 TextFormField(
@@ -97,12 +98,7 @@ class _LoginViewState extends State<LoginView> {
                       hintStyle: TextStyle(color: AuthColors.text_grey),
                       hintText: fieldType2.hint),
                       maxLength: fieldType2.maxLength,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return fieldType2.errorText;
-                    }
-                    return null;
-                  },
+                  validator: field2Validator,
                   obscureText: true,
                 ),
                 SizedBox(height: 48),
