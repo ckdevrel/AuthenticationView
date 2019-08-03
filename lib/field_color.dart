@@ -2,7 +2,7 @@ import 'package:authentication_view/auth_colors.dart';
 import 'package:flutter/material.dart';
 
 class FieldStyle {
-  static const DEFAULT  = const FieldStyle.value(24, 16, 24, 36, AuthColors.underline, AuthColors.green, AuthColors.green);
+  static const DEFAULT  = const FieldStyle.value(24, 16, 24, 36, AuthColors.underline, AuthColors.green, AuthColors.text_grey);
 
   final double spaceBetweenFields;
   final double spaceToTopField;
