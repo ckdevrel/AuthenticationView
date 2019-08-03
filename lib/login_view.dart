@@ -3,6 +3,7 @@ library authentication_view;
 import 'package:authentication_view/button_style.dart';
 import 'package:authentication_view/button_view.dart';
 import 'package:authentication_view/field_color.dart';
+import 'package:authentication_view/field_icons.dart';
 import 'package:authentication_view/field_type.dart';
 import 'package:authentication_view/space.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class LoginView extends StatefulWidget {
   FieldStyle fieldStyle;
   ButtonStyle buttonStyle;
   Widget placeHolderAboveButton;
+  List<FieldIcons> fieldIcons;
 
   LoginView(
       {this.fieldTypes,
@@ -25,7 +27,8 @@ class LoginView extends StatefulWidget {
       this.field1Validator,
       this.field2Validator,
       this.fieldStyle, this.buttonStyle,
-      this.placeHolderAboveButton});
+      this.placeHolderAboveButton,
+      this.fieldIcons});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -50,6 +53,7 @@ class _LoginViewState extends State<LoginView> {
   VoidCallback onButtonPressed;
   final FocusNode field1FocusNode = FocusNode();
   final FocusNode field2FocusNode = FocusNode();
+  List<FieldIcons> fieldIcons;
 
   @override
   void initState() {
@@ -63,6 +67,7 @@ class _LoginViewState extends State<LoginView> {
     field2Validator = widget.field2Validator ?? null;
     fieldStyle = widget.fieldStyle ?? FieldStyle.DEFAULT;
     buttonStyle = widget.buttonStyle ?? ButtonStyle.DEFAULT;
+    fieldIcons = widget.fieldIcons ?? null;
   }
 
   @override
@@ -80,6 +85,7 @@ class _LoginViewState extends State<LoginView> {
               children: <Widget>[
                 Space(fieldStyle.spaceToTopField),
                 TextFormFieldView(
+                  leftIcon: (fieldIcons != null && fieldIcons.length > 0 && fieldIcons[0].leftIconEnabled) ? fieldIcons[0].leftIcon : null,
                   focusNode: field1FocusNode,
                   fieldStyle: fieldStyle,
                     fieldType: fieldTypes[0],
@@ -92,7 +98,8 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 Space(fieldStyle.spaceBetweenFields),
                 TextFormFieldView(
-                    focusNode: field2FocusNode,
+                  leftIcon: (fieldIcons != null && fieldIcons.length > 1 && fieldIcons[1].leftIconEnabled) && fieldIcons[1].leftIconEnabled ? fieldIcons[1].leftIcon : null,
+                  focusNode: field2FocusNode,
                     fieldStyle: fieldStyle,
                     fieldType: fieldTypes[1],
                     textEditingController: textEditingControllers[1],
