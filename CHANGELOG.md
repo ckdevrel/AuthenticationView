@@ -1,3 +1,3 @@
-## [0.2.1] - 01/08/2019 08:25 AM.
+## [0.2.2] - 01/08/2019 08:25 AM.
 
-* Adds Field icons.
+* Reduces field icons default sizes.
