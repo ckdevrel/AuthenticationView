@@ -9,13 +9,16 @@ class TextFormFieldView extends StatelessWidget {
   FieldType fieldType;
   FieldStyle fieldStyle;
   TextInputAction textInputAction;
+  ValueChanged<String> onFieldSubmitted;
+  FocusNode focusNode;
 
   TextFormFieldView({this.fieldType, this.textEditingController,
-      this.formFieldValidator, this.fieldStyle, this.textInputAction});
+      this.formFieldValidator, this.fieldStyle, this.textInputAction, @required this.onFieldSubmitted, this.focusNode});
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      focusNode: focusNode,
       textInputAction: textInputAction,
       controller: textEditingController,
       decoration: InputDecoration(
@@ -28,6 +31,7 @@ class TextFormFieldView extends StatelessWidget {
       maxLength: fieldType.maxLength,
       validator: formFieldValidator,
       obscureText: fieldType.hideField,
+      onFieldSubmitted: onFieldSubmitted,
     );
   }
 }

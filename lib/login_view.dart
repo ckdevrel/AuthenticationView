@@ -48,6 +48,8 @@ class _LoginViewState extends State<LoginView> {
   FieldStyle fieldStyle;
   ButtonStyle buttonStyle;
   VoidCallback onButtonPressed;
+  final FocusNode field1FocusNode = FocusNode();
+  final FocusNode field2FocusNode = FocusNode();
 
   @override
   void initState() {
@@ -78,18 +80,27 @@ class _LoginViewState extends State<LoginView> {
               children: <Widget>[
                 Space(fieldStyle.spaceToTopField),
                 TextFormFieldView(
-                    fieldStyle: fieldStyle,
+                  focusNode: field1FocusNode,
+                  fieldStyle: fieldStyle,
                     fieldType: fieldTypes[0],
                     textEditingController: textEditingControllers[0],
                     formFieldValidator: field1Validator,
-                    textInputAction: TextInputAction.next),
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (String value) {
+                        _fieldFocusChange(context, field1FocusNode, field2FocusNode);
+                    },
+                ),
                 Space(fieldStyle.spaceBetweenFields),
                 TextFormFieldView(
+                    focusNode: field2FocusNode,
                     fieldStyle: fieldStyle,
                     fieldType: fieldTypes[1],
                     textEditingController: textEditingControllers[1],
                     formFieldValidator: field2Validator,
-                    textInputAction: TextInputAction.done),
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (String value) {
+                      _resetFocus(context);
+                  },),
                 Space(fieldStyle.spaceBetweenFields),
                 placeHolderAboveButton,
                 Space(fieldStyle.spaceToBottomField),
@@ -105,6 +116,16 @@ class _LoginViewState extends State<LoginView> {
         ),
       ],
     );
+  }
+
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
+
+  _resetFocus(BuildContext context) {
+    field1FocusNode.unfocus();
+    field2FocusNode.unfocus();
   }
 }
 
