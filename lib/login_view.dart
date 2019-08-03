@@ -1,31 +1,31 @@
+library authentication_view;
+
+import 'package:authentication_view/button_style.dart';
+import 'package:authentication_view/button_view.dart';
+import 'package:authentication_view/field_color.dart';
+import 'package:authentication_view/field_type.dart';
+import 'package:authentication_view/space.dart';
 import 'package:flutter/material.dart';
-import 'auth_colors.dart';
-import 'authentication_view.dart';
-
-class FieldType {
-  static const EMAIL  = const FieldType.value('Email address', 25, TextInputType.emailAddress, "Enter valid email address");
-  static const MOBILE = const FieldType.value('Mobile number', 10, TextInputType.number, "Enter valid mobile number");
-  static const EMPLOYEE_ID  = const FieldType.value('Employee Id', 5, TextInputType.number, "Enter valid 5 digit employee id");
-  static const PASSWORD  = const FieldType.value('Password', 15, TextInputType.number, "Password must be between 4 and 8 digits long and include at least one numeric digit");
-
-  final String hint;
-  final String errorText;
-  final int maxLength;
-  final TextInputType keyboardType;
-
-  const FieldType.value(this.hint, this.maxLength, this.keyboardType, this.errorText);
-}
+import 'text_form_field_view.dart';
 
 class LoginView extends StatefulWidget {
-
   List<FieldType> fieldTypes;
   ValidationCallback onValidation;
-  String buttonText;
   Widget headerLayout;
   FormFieldValidator field1Validator;
   FormFieldValidator field2Validator;
+  FieldStyle fieldStyle;
+  ButtonStyle buttonStyle;
+  Widget placeHolderAboveButton;
 
-  LoginView({this.fieldTypes, @required this.onValidation, this.buttonText, this.headerLayout, this.field1Validator, this.field2Validator});
+  LoginView(
+      {this.fieldTypes,
+      @required this.onValidation,
+      this.headerLayout,
+      this.field1Validator,
+      this.field2Validator,
+      this.fieldStyle, this.buttonStyle,
+      this.placeHolderAboveButton});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -36,86 +36,67 @@ class _LoginViewState extends State<LoginView> {
 
   List<FieldType> fieldTypes;
   ValidationCallback onValidation;
-  String buttonText;
   Widget headerLayout;
-  List<TextEditingController> textEditingControllers = [TextEditingController(), TextEditingController()];
+  Widget placeHolderAboveButton;
+
+  List<TextEditingController> textEditingControllers = [
+    TextEditingController(),
+    TextEditingController()
+  ];
   FormFieldValidator field1Validator;
   FormFieldValidator field2Validator;
+  FieldStyle fieldStyle;
+  ButtonStyle buttonStyle;
+  VoidCallback onButtonPressed;
 
   @override
   void initState() {
     super.initState();
     fieldTypes = widget.fieldTypes ?? [FieldType.MOBILE, FieldType.PASSWORD];
     onValidation = widget.onValidation ?? null;
-    buttonText = widget.buttonText ?? "CONTINUE";
     headerLayout = widget.headerLayout ?? Container(height: 0, width: 0);
+    placeHolderAboveButton =
+        widget.placeHolderAboveButton ?? Container(height: 0, width: 0);
     field1Validator = widget.field1Validator ?? null;
     field2Validator = widget.field2Validator ?? null;
+    fieldStyle = widget.fieldStyle ?? FieldStyle.DEFAULT;
+    buttonStyle = widget.buttonStyle ?? ButtonStyle.DEFAULT;
   }
 
   @override
   Widget build(BuildContext context) {
-    FieldType fieldType1 = fieldTypes[0];
-    FieldType fieldType2 = fieldTypes[1];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
+    return ListView(
       children: <Widget>[
         headerLayout,
-        SingleChildScrollView(
-          padding: EdgeInsets.all(36),
+        Padding(
+          padding: EdgeInsets.all(fieldStyle.outerPadding),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 24),
-                TextFormField(
-                  controller: textEditingControllers[0],
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AuthColors.underline)),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AuthColors.green),
-                    ),
-                    hintStyle: TextStyle(color: AuthColors.text_grey),
-                    hintText: fieldType1.hint),
-                  keyboardType: fieldType1.keyboardType,
-                  maxLength: fieldType1.maxLength,
-                  validator: field1Validator
-                ),
-                SizedBox(height: 16),
-                TextFormField(
-                  controller: textEditingControllers[1],
-                  decoration: InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: AuthColors.underline)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AuthColors.green),
-                      ),
-                      hintStyle: TextStyle(color: AuthColors.text_grey),
-                      hintText: fieldType2.hint),
-                      maxLength: fieldType2.maxLength,
-                  validator: field2Validator,
-                  obscureText: true,
-                ),
-                SizedBox(height: 48),
-                SizedBox(
-                  width: 240,
-                  height: 55,
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(55))),
-                    color: AuthColors.green,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      onValidation(_formKey.currentState.validate(), [textEditingControllers[0].text, textEditingControllers[1].text]);
-                    },
-                    child: Text(widget.buttonText),
-                  ),
-                ),
+                Space(fieldStyle.spaceToTopField),
+                TextFormFieldView(
+                    fieldStyle: fieldStyle,
+                    fieldType: fieldTypes[0],
+                    textEditingController: textEditingControllers[0],
+                    formFieldValidator: field1Validator),
+                Space(fieldStyle.spaceBetweenFields),
+                TextFormFieldView(
+                    fieldStyle: fieldStyle,
+                    fieldType: fieldTypes[1],
+                    textEditingController: textEditingControllers[1],
+                    formFieldValidator: field2Validator),
+                Space(fieldStyle.spaceBetweenFields),
+                placeHolderAboveButton,
+                Space(fieldStyle.spaceToBottomField),
+                ButtonView(onButtonPressed: () {
+                    onValidation(
+                        _formKey.currentState.validate(),
+                        textEditingControllers[0].text,
+                        textEditingControllers[1].text);
+                }, buttonStyle: buttonStyle),
               ],
             ),
           ),
@@ -124,3 +105,6 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+
+typedef ValidationCallback = void Function(
+    bool isValidationSuccess, String value1, String value2);
