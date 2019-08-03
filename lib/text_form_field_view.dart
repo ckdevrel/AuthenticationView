@@ -8,13 +8,15 @@ class TextFormFieldView extends StatelessWidget {
   FormFieldValidator formFieldValidator;
   FieldType fieldType;
   FieldStyle fieldStyle;
+  TextInputAction textInputAction;
 
   TextFormFieldView({this.fieldType, this.textEditingController,
-      this.formFieldValidator, this.fieldStyle});
+      this.formFieldValidator, this.fieldStyle, this.textInputAction});
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      textInputAction: textInputAction,
       controller: textEditingController,
       decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
