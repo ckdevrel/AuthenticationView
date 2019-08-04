@@ -1,4 +1,4 @@
-import 'package:authentication_view/field_color.dart';
+import 'package:authentication_view/field_style.dart';
 import 'package:authentication_view/field_type.dart';
 import 'package:flutter/material.dart';
 

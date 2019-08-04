@@ -1,3 +1,3 @@
-## [0.2.6] - 01/08/2019 08:25 AM.
+## [0.2.7] - 01/08/2019 08:25 AM.
 
-* Reduces field icons default sizes.
+* Removes optional constructors for const.

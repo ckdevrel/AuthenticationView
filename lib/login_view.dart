@@ -2,7 +2,7 @@ library authentication_view;
 
 import 'package:authentication_view/button_style.dart';
 import 'package:authentication_view/button_view.dart';
-import 'package:authentication_view/field_color.dart';
+import 'package:authentication_view/field_style.dart';
 import 'package:authentication_view/field_icons.dart';
 import 'package:authentication_view/field_type.dart';
 import 'package:authentication_view/space.dart';
@@ -76,7 +76,7 @@ class _LoginViewState extends State<LoginView> {
       children: <Widget>[
         headerLayout,
         Padding(
-          padding: EdgeInsets.all(fieldStyle.outerPadding),
+          padding: fieldStyle.outerPadding,
           child: Form(
             key: _formKey,
             child: Column(
