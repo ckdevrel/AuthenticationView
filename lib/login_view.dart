@@ -6,6 +6,7 @@ import 'package:authentication_view/field_style.dart';
 import 'package:authentication_view/field_icons.dart';
 import 'package:authentication_view/field_type.dart';
 import 'package:authentication_view/space.dart';
+import 'package:authentication_view/util.dart';
 import 'package:flutter/material.dart';
 import 'text_form_field_view.dart';
 
@@ -94,7 +95,7 @@ class _LoginViewState extends State<LoginView> {
               children: <Widget>[
                 Space(fieldStyle.spaceToTopField),
                 TextFormFieldView(
-                  leftIcon: (fieldIcons != null && fieldIcons.length > 0 && fieldIcons[0].leftIconEnabled) ? fieldIcons[0].leftIcon : null,
+                  leftIcon: Util.isLeftIconAvailable(0, fieldIcons) ? fieldIcons[0].leftIcon : null,
                   focusNode: field1FocusNode,
                   fieldStyle: fieldStyle,
                     fieldType: fieldTypes[0],
@@ -107,7 +108,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 Space(fieldStyle.spaceBetweenFields),
                 TextFormFieldView(
-                  leftIcon: (fieldIcons != null && fieldIcons.length > 1 && fieldIcons[1].leftIconEnabled) && fieldIcons[1].leftIconEnabled ? fieldIcons[1].leftIcon : null,
+                  leftIcon: Util.isLeftIconAvailable(1, fieldIcons) ? fieldIcons[1].leftIcon : null,
                   focusNode: field2FocusNode,
                     fieldStyle: fieldStyle,
                     fieldType: fieldTypes[1],

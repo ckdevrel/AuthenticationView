@@ -26,6 +26,9 @@ class TextFormFieldView extends TextFormField {
           textInputAction: textInputAction,
           controller: textEditingController,
           decoration: InputDecoration(
+            counter: SizedBox(
+              height: 0.0,
+            ),
             prefixIcon: leftIcon,
               enabledBorder: UnderlineInputBorder(
                   borderSide:
