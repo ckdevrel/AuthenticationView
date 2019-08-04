@@ -29,6 +29,7 @@ class RegistrationView extends StatefulWidget {
   ButtonStyle buttonStyle;
   Widget placeHolderAboveButton;
   List<FieldIcons> fieldIcons;
+  String buttonText;
 
   RegistrationView(
       {this.fieldTypes,
@@ -46,7 +47,8 @@ class RegistrationView extends StatefulWidget {
         this.fieldStyle,
         this.buttonStyle,
         this.placeHolderAboveButton,
-        this.fieldIcons}) : assert(fieldTypes != null && fieldTypes.length == 9);
+        this.fieldIcons,
+        this.buttonText}) : assert(fieldTypes != null && fieldTypes.length == 9);
 
   @override
   _RegistrationViewState createState() => _RegistrationViewState();
@@ -59,6 +61,7 @@ class _RegistrationViewState extends State<RegistrationView> {
   RegistrationValidationCallback onValidation;
   Widget headerLayout;
   Widget placeHolderAboveButton;
+  String buttonText;
 
   List<TextEditingController> textEditingControllers = [
     TextEditingController(),
@@ -114,6 +117,7 @@ class _RegistrationViewState extends State<RegistrationView> {
     fieldStyle = widget.fieldStyle ?? FieldStyle.DEFAULT;
     buttonStyle = widget.buttonStyle ?? ButtonStyle.DEFAULT;
     fieldIcons = widget.fieldIcons ?? null;
+    buttonText = widget.buttonText ?? "SUBMIT";
   }
 
   @override
@@ -263,6 +267,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                 placeHolderAboveButton,
                 Space(fieldStyle.spaceToBottomField),
                 ButtonView(
+                    buttonText: buttonText,
                     onButtonPressed: () {
                       onValidation(
                           _formKey.currentState.validate(),

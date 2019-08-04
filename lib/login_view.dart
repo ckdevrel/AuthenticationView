@@ -21,6 +21,7 @@ class LoginView extends StatefulWidget {
   Widget placeHolderAboveButton;
   Widget placeHolderBelowButton;
   List<FieldIcons> fieldIcons;
+  String buttonText;
 
   LoginView(
       {this.fieldTypes,
@@ -31,7 +32,8 @@ class LoginView extends StatefulWidget {
       this.fieldStyle, this.buttonStyle,
       this.placeHolderAboveButton,
       this.placeHolderBelowButton,
-      this.fieldIcons});
+      this.fieldIcons,
+      this.buttonText});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -58,6 +60,7 @@ class _LoginViewState extends State<LoginView> {
   final FocusNode field1FocusNode = FocusNode();
   final FocusNode field2FocusNode = FocusNode();
   List<FieldIcons> fieldIcons;
+  String buttonText;
 
   @override
   void initState() {
@@ -73,6 +76,7 @@ class _LoginViewState extends State<LoginView> {
     buttonStyle = widget.buttonStyle ?? ButtonStyle.DEFAULT;
     fieldIcons = widget.fieldIcons ?? null;
     placeHolderBelowButton = widget.placeHolderBelowButton ?? Container(height: 0, width: 0);
+    buttonText = widget.buttonText ?? "CONTINUE";
   }
 
   @override
@@ -126,7 +130,7 @@ class _LoginViewState extends State<LoginView> {
                         _formKey.currentState.validate(),
                         textEditingControllers[0].text,
                         textEditingControllers[1].text);
-                }, buttonStyle: buttonStyle),
+                }, buttonStyle: buttonStyle, buttonText: buttonText),
                 Space(fieldStyle.spaceBetweenFields),
                 placeHolderBelowButton
               ],

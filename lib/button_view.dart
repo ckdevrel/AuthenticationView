@@ -5,8 +5,9 @@ class ButtonView extends StatelessWidget {
 
   ButtonStyle buttonStyle;
   VoidCallback onButtonPressed;
+  String buttonText;
 
-  ButtonView({@required this.onButtonPressed, this.buttonStyle});
+  ButtonView({@required this.onButtonPressed, this.buttonStyle, this.buttonText});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class ButtonView extends StatelessWidget {
         color: buttonStyle.buttonColor,
         textColor: buttonStyle.textColor,
         onPressed: onButtonPressed,
-        child: Text(buttonStyle.buttonText),
+        child: Text(buttonText),
       ),
     );
   }
