@@ -18,6 +18,7 @@ class LoginView extends StatefulWidget {
   FieldStyle fieldStyle;
   ButtonStyle buttonStyle;
   Widget placeHolderAboveButton;
+  Widget placeHolderBelowButton;
   List<FieldIcons> fieldIcons;
 
   LoginView(
@@ -28,6 +29,7 @@ class LoginView extends StatefulWidget {
       this.field2Validator,
       this.fieldStyle, this.buttonStyle,
       this.placeHolderAboveButton,
+      this.placeHolderBelowButton,
       this.fieldIcons});
 
   @override
@@ -41,6 +43,7 @@ class _LoginViewState extends State<LoginView> {
   ValidationCallback onValidation;
   Widget headerLayout;
   Widget placeHolderAboveButton;
+  Widget placeHolderBelowButton;
 
   List<TextEditingController> textEditingControllers = [
     TextEditingController(),
@@ -68,6 +71,12 @@ class _LoginViewState extends State<LoginView> {
     fieldStyle = widget.fieldStyle ?? FieldStyle.DEFAULT;
     buttonStyle = widget.buttonStyle ?? ButtonStyle.DEFAULT;
     fieldIcons = widget.fieldIcons ?? null;
+    placeHolderBelowButton = widget.placeHolderBelowButton ?? Container(height: 0, width: 0);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -117,6 +126,8 @@ class _LoginViewState extends State<LoginView> {
                         textEditingControllers[0].text,
                         textEditingControllers[1].text);
                 }, buttonStyle: buttonStyle),
+                Space(fieldStyle.spaceBetweenFields),
+                placeHolderBelowButton
               ],
             ),
           ),
