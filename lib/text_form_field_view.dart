@@ -36,7 +36,7 @@ class TextFormFieldView extends TextFormField {
               focusedBorder: UnderlineInputBorder(
                   borderSide:
                       BorderSide(color: fieldStyle.underlineFocusedColor)),
-              hintStyle: TextStyle(color: fieldStyle.textColor),
+              hintStyle: TextStyle(color: fieldStyle.textColor, fontFamily: 'SourceSansPro', fontSize: 14),
               hintText: fieldType.hint),
           maxLength: fieldType.maxLength,
           validator: formFieldValidator,
