@@ -145,7 +145,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         formFieldValidator: (value) => fieldValidator(value, index),
         textInputAction: TextInputAction.next,
         onFieldSubmitted: (String value) {
-          if (index == fieldTypes.length - 1) {
+          if (isLastField(index)) {
             _resetFocus(context);
           } else {
             _fieldFocusChange(
@@ -154,12 +154,14 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         },
       )
       );
-      if(index != fieldTypes.length - 1){
+      if(!isLastField(index)){
         widgets.add(Space(fieldStyle.spaceBetweenFields));
       }
     }
     return widgets;
   }
+
+  bool isLastField(int index) => index == fieldTypes.length - 1;
 
   void init() {
     for (int index= 0; index < fieldTypes.length; index++) {
