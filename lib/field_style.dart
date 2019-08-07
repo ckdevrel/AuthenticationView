@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class FieldStyle {
   static const DEFAULT = const FieldStyle.value(
-      24, 16, 24, EdgeInsets.all(36), AuthColors.underline, AuthColors.green, AuthColors.text_grey);
+      24, 16, 24, 36, AuthColors.underline, AuthColors.green, AuthColors.text_grey);
 
   final double spaceBetweenFields;
   final double spaceToTopField;
   final double spaceToBottomField;
-  final EdgeInsetsGeometry outerPadding;
+  final double outerPadding;
   final Color underlineDefaultColor;
   final Color underlineFocusedColor;
   final Color textColor;

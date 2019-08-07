@@ -6,12 +6,14 @@ class ButtonView extends StatelessWidget {
   ButtonStyle buttonStyle;
   VoidCallback onButtonPressed;
   String buttonText;
+  double margin;
 
-  ButtonView({@required this.onButtonPressed, this.buttonStyle, this.buttonText});
+  ButtonView({@required this.onButtonPressed, this.buttonStyle, this.buttonText, this.margin});
 
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
+    return  Container(
+      margin: EdgeInsets.symmetric(horizontal: margin),
       width: buttonStyle.width,
       height: buttonStyle.height,
       child: FlatButton(
