@@ -11,6 +11,7 @@ class TextFormFieldView extends TextFormField {
   ValueChanged<String> onFieldSubmitted;
   FocusNode focusNode;
   Widget leftIcon;
+  bool autoFocus;
 
   TextFormFieldView(
       {this.fieldType,
@@ -20,8 +21,9 @@ class TextFormFieldView extends TextFormField {
       this.textInputAction,
       @required this.onFieldSubmitted,
       this.focusNode,
-      this.leftIcon})
+      this.leftIcon, this.autoFocus})
       : super(
+          autofocus: autoFocus,
           focusNode: focusNode,
           textInputAction: textInputAction,
           controller: textEditingController,

@@ -81,11 +81,6 @@ class _AuthenticationViewState extends State<AuthenticationView> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    init();
-  }
-  @override
   void dispose() {
     super.dispose();
   }
@@ -137,6 +132,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
     final List<Widget> widgets = [];
     for (int index = 0; index < fieldTypes.length; index++) {
       widgets.add(TextFormFieldView(
+        autoFocus: index == 0,
         leftIcon: null,
         focusNode: focusNodes[index],
         fieldStyle: fieldStyle,
@@ -145,12 +141,15 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         formFieldValidator: (value) => fieldValidator(value, index),
         textInputAction: TextInputAction.next,
         onFieldSubmitted: (String value) {
-          if (isLastField(index)) {
+            int currentPosition = index;
+            int nextPosition = index + 1;
+          if(isLastField(index)){
             _resetFocus(context);
           } else {
             _fieldFocusChange(
-                context, focusNodes[index], focusNodes[index + 1]);
+                context, focusNodes[currentPosition], focusNodes[nextPosition]);
           }
+
         },
       )
       );
