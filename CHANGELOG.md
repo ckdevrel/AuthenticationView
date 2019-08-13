@@ -1,3 +1,3 @@
-## [0.4.2] - 07/08/2019 08:25 AM.
+## [0.4.3] - 07/08/2019 08:25 AM.
 
-* Sends value as map and improved performance.
+* Makes field type class as immutable

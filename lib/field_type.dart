@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class FieldType {
   static const NAME  = const FieldType.value('Name', 30, TextInputType.text, false);
   static const EMAIL  = const FieldType.value('Email address', 50, TextInputType.emailAddress, false);

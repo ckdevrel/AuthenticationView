@@ -14,7 +14,7 @@ packages:
       path: "/Users/Chandru/Desktop/Flutter/opensource/authentication_view"
       relative: false
     source: path
-    version: "0.4.1"
+    version: "0.4.2"
   boolean_selector:
     dependency: transitive
     description:
