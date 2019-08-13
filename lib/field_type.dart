@@ -6,7 +6,7 @@ class FieldType {
   static const MOBILE = const FieldType.value('Mobile number', 10, TextInputType.phone, false);
   static const EMPLOYEE_ID  = const FieldType.value('Employee Id', 5, TextInputType.number, false);
   static const PASSWORD  = const FieldType.value('Password', 15, TextInputType.text, true);
-  static const CONFIRM_PASSWORD  = const FieldType.value('Current Password', 15, TextInputType.text, true);
+  static const CONFIRM_PASSWORD  = const FieldType.value('Confirm Password', 15, TextInputType.text, true);
 
   final String hint;
   final int maxLength;

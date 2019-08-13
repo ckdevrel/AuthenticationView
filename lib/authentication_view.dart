@@ -52,6 +52,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 
   Map<int, TextEditingController> textEditingControllers = {};
   Map<int, FocusNode> focusNodes = {};
+  Map<FieldType, String> values = {};
   FieldValidationCallback fieldValidator;
   FieldStyle fieldStyle;
   ButtonStyle buttonStyle;
@@ -109,7 +110,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         ButtonView(margin: fieldStyle.outerPadding, onButtonPressed: () {
           onValidation(
               _formKey.currentState.validate(),
-              textEditingControllers);
+              values);
         }, buttonStyle: buttonStyle, buttonText: buttonText),
         Visibility(visible: placeHolderBelowButton != null, child: Space(fieldStyle.spaceBetweenFields)),
         placeHolderBelowButton
@@ -131,14 +132,18 @@ class _AuthenticationViewState extends State<AuthenticationView> {
   List<Widget> _getFormFields() {
     final List<Widget> widgets = [];
     for (int index = 0; index < fieldTypes.length; index++) {
+      var fieldType = fieldTypes[index];
       widgets.add(TextFormFieldView(
         autoFocus: index == 0,
         leftIcon: null,
         focusNode: focusNodes[index],
         fieldStyle: fieldStyle,
-        fieldType: fieldTypes[index],
+        fieldType: fieldType,
         textEditingController: textEditingControllers[index],
-        formFieldValidator: (value) => fieldValidator(value, index),
+        formFieldValidator: (value) {
+          values[fieldType] = value;
+          return fieldValidator(fieldType, values);
+        },
         textInputAction: TextInputAction.next,
         onFieldSubmitted: (String value) {
             int currentPosition = index;
@@ -171,6 +176,6 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 }
 
 typedef ValidationCallback = void Function(
-    bool isValidationSuccess, Map<int, TextEditingController>);
+    bool isValidationSuccess, Map<FieldType, String>);
 
-typedef FieldValidationCallback = String Function(String value, int index);
+typedef FieldValidationCallback = String Function(FieldType fieldType, Map<FieldType, String> values);
