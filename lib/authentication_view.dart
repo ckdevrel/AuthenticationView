@@ -52,7 +52,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 
   Map<int, TextEditingController> textEditingControllers = {};
   Map<int, FocusNode> focusNodes = {};
-  Map<FieldType, String> values = {};
+  Map<String, String> values = {};
   FieldValidationCallback fieldValidator;
   FieldStyle fieldStyle;
   ButtonStyle buttonStyle;
@@ -62,7 +62,8 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 
   @override
   void initState() {
-    fieldTypes = widget.fieldTypes ?? [FieldType.MOBILE, FieldType.PASSWORD];
+    fieldTypes = widget.fieldTypes ?? [FieldType.value('Mobile number', 10, TextInputType.phone, false),
+                                       FieldType.value('Password', 15, TextInputType.text, true)];
     onValidation = widget.onValidation;
     headerLayout = widget.headerLayout ?? Container(height: 0, width: 0);
     placeHolderAboveButton =
@@ -141,8 +142,9 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         fieldType: fieldType,
         textEditingController: textEditingControllers[index],
         formFieldValidator: (value) {
-          values[fieldType] = value;
-          return fieldValidator(fieldType, values);
+          var hint = fieldType.hint;
+          values[hint] = value;
+          return fieldValidator(hint, values);
         },
         textInputAction: TextInputAction.next,
         onFieldSubmitted: (String value) {
@@ -176,6 +178,6 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 }
 
 typedef ValidationCallback = void Function(
-    bool isValidationSuccess, Map<FieldType, String>);
+    bool isValidationSuccess, Map<String, String> valueMap);
 
-typedef FieldValidationCallback = String Function(FieldType fieldType, Map<FieldType, String> values);
+typedef FieldValidationCallback = String Function(String hintAsKey, Map<String, String> valueMap);

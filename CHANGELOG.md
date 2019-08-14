@@ -1,3 +1,3 @@
-## [0.4.3] - 07/08/2019 08:25 AM.
+## [0.4.4] - 07/08/2019 08:25 AM.
 
-* Makes field type class as immutable
+* Makes key as hint for values
