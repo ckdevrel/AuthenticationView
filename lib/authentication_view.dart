@@ -1,7 +1,7 @@
 library authentication_view;
 
 import 'package:authentication_view/button_style.dart';
-import 'package:authentication_view/button_view.dart';
+import 'package:authentication_view/custom_button.dart';
 import 'package:authentication_view/field_icons.dart';
 import 'package:authentication_view/field_style.dart';
 import 'package:authentication_view/field_type.dart';
@@ -108,7 +108,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         Space(fieldStyle.spaceToBottomField),
         placeHolderAboveButton,
         Visibility(visible: placeHolderAboveButton != null, child: Space(fieldStyle.spaceBetweenFields)),
-        ButtonView(margin: fieldStyle.outerPadding, onButtonPressed: () {
+        CustomButton(margin: EdgeInsets.only(left: fieldStyle.outerPadding, bottom: fieldStyle.outerPadding, right: fieldStyle.outerPadding), onButtonPressed: () {
           onValidation(
               _formKey.currentState.validate(),
               values);

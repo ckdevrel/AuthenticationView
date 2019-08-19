@@ -1,19 +1,19 @@
 import 'package:authentication_view/button_style.dart';
 import 'package:flutter/material.dart';
 
-class ButtonView extends StatelessWidget {
+class CustomButton extends StatelessWidget {
 
   ButtonStyle buttonStyle;
   VoidCallback onButtonPressed;
   String buttonText;
-  double margin;
+  EdgeInsetsGeometry margin;
 
-  ButtonView({@required this.onButtonPressed, this.buttonStyle, this.buttonText, this.margin});
+  CustomButton({@required this.onButtonPressed, this.buttonStyle, this.buttonText, this.margin});
 
   @override
   Widget build(BuildContext context) {
     return  Container(
-      margin: EdgeInsets.symmetric(horizontal: margin),
+      margin: margin,
       width: buttonStyle.width,
       height: buttonStyle.height,
       child: FlatButton(
