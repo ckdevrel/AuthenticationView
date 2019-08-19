@@ -1,3 +1,3 @@
-## [0.4.4] - 07/08/2019 08:25 AM.
+## [0.4.5] - 07/08/2019 08:25 AM.
 
-* Makes key as hint for values
+* Makes button view margin as configurable

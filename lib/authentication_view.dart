@@ -108,7 +108,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         Space(fieldStyle.spaceToBottomField),
         placeHolderAboveButton,
         Visibility(visible: placeHolderAboveButton != null, child: Space(fieldStyle.spaceBetweenFields)),
-        ButtonView(margin: fieldStyle.outerPadding, onButtonPressed: () {
+        ButtonView(margin: EdgeInsets.only(left: fieldStyle.outerPadding, bottom: fieldStyle.outerPadding, right: fieldStyle.outerPadding), onButtonPressed: () {
           onValidation(
               _formKey.currentState.validate(),
               values);
