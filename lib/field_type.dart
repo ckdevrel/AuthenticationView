@@ -5,6 +5,7 @@ class FieldType {
   final int maxLength;
   final TextInputType keyboardType;
   final bool hideField;
+  final String id;
 
-  const FieldType.value(this.hint, this.maxLength, this.keyboardType, this.hideField);
+  const FieldType.value(this.id, this.hint, this.maxLength, this.keyboardType, this.hideField);
 }
