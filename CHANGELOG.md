@@ -1,3 +1,3 @@
-## [0.4.6] - 07/08/2019 08:25 AM.
+## [0.4.7] - 07/08/2019 08:25 AM.
 
-* Renames button view to custom button
+* Keeps id as identifier instead of hint text

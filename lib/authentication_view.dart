@@ -62,8 +62,8 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 
   @override
   void initState() {
-    fieldTypes = widget.fieldTypes ?? [FieldType.value('Mobile number', 10, TextInputType.phone, false),
-                                       FieldType.value('Password', 15, TextInputType.text, true)];
+    fieldTypes = widget.fieldTypes ?? [FieldType.value('mobile','Mobile number', 10, TextInputType.phone, false),
+                                       FieldType.value('password','Password', 15, TextInputType.text, true)];
     onValidation = widget.onValidation;
     headerLayout = widget.headerLayout ?? Container(height: 0, width: 0);
     placeHolderAboveButton =
@@ -142,9 +142,9 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         fieldType: fieldType,
         textEditingController: textEditingControllers[index],
         formFieldValidator: (value) {
-          var hint = fieldType.hint;
-          values[hint] = value;
-          return fieldValidator(hint, values);
+          var id = fieldType.id;
+          values[id] = value;
+          return fieldValidator(id, values);
         },
         textInputAction: TextInputAction.next,
         onFieldSubmitted: (String value) {
