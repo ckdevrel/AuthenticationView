@@ -1,10 +1,6 @@
 name: authentication_view
 description: A new Flutter package project for login and signups.
-<<<<<<< HEAD
 version: 0.4.8
-=======
-version: 0.4.7
->>>>>>> 986e71f7c70e75b4b2592ee9339dc3c01ec4066a
 author: TakeoffAndroid<takeoffandroid@gmail.com>
 homepage: https://github.com/TakeoffAndroid/AuthenticationView
 
