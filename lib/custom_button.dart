@@ -7,8 +7,9 @@ class CustomButton extends StatelessWidget {
   VoidCallback onButtonPressed;
   String buttonText;
   EdgeInsetsGeometry margin;
+  TextStyle textStyle;
 
-  CustomButton({@required this.onButtonPressed, this.buttonStyle, this.buttonText, this.margin});
+  CustomButton({@required this.onButtonPressed, this.buttonStyle, this.buttonText, this.margin, this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class CustomButton extends StatelessWidget {
         color: buttonStyle.buttonColor,
         textColor: buttonStyle.textColor,
         onPressed: onButtonPressed,
-        child: Text(buttonText),
+        child: Text(buttonText, style: textStyle),
       ),
     );
   }

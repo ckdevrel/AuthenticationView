@@ -1,2 +1,2 @@
-## [0.4.8] - 07/08/2019 08:25 AM.
-* Keeps id as identifier instead of hint text
+## [0.4.9] - 07/08/2019 08:25 AM.
+* Configures setting text style for button.
